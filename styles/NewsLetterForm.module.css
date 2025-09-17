@@ -1,0 +1,26 @@
+.NewsLetter {
+  background-color: rgba(255, 255, 255, 0.055); /* fond semi-transparent clair pour l’effet glass */
+  color: white;
+  z-index: 50;       /* au-dessus du Hero */
+  backdrop-filter: blur(4px); /* blur plus marqué pour effet verre */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* contour subtil */
+  transition: all 0.3s ease-in-out;
+}
+
+.NewsLetter ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.NewsLetter a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.NewsLetter a:hover {
+  color: #69acf8;
+}
+
+
