@@ -7,10 +7,13 @@ export default function ContactForm() {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
-    email: "",
-    phone: "",
-    message: "",
+    mail_address: "",
+    phone_number: "",
+    message_object: "", // champ sujet
+    text: "",
   });
+
+  const [status, setStatus] = useState(null); // feedback après envoi
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,9 +23,32 @@ export default function ContactForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    try {
+      const response = await fetch("http://localhost:8010/api/message", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error("Failed to send message");
+
+      const result = await response.json();
+      console.log("Message sent:", result);
+      setStatus("Message sent successfully!");
+      setFormData({
+        firstname: "",
+        lastname: "",
+        mail_address: "",
+        phone_number: "",
+        message_object: "",
+        text: "",
+      });
+    } catch (error) {
+      console.error(error);
+      setStatus("Error sending message. Please try again.");
+    }
   };
 
   return (
@@ -30,17 +56,14 @@ export default function ContactForm() {
       className="relative min-h-screen flex items-start justify-center bg-cover bg-center bg-fixed pt-24 sm:pt-32 lg:pt-40"
       style={{ backgroundImage: "url('/images/beautiful-photo-sea-waves.jpg')" }}
     >
-      {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/40"></div>
 
-      {/* Glass effect card with animation */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="relative z-10 w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-4 sm:mx-0 bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl shadow-xl p-6 sm:p-8 flex flex-col gap-6 text-white"
       >
-        {/* Title */}
         <div className="text-center">
           <h2 className="text-3xl font-bold mb-2">Contact Us</h2>
           <p className="text-white/80 text-sm sm:text-base">
@@ -48,7 +71,6 @@ export default function ContactForm() {
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
           <div className="flex flex-col sm:flex-row gap-4">
             <input
@@ -73,26 +95,35 @@ export default function ContactForm() {
 
           <input
             type="email"
-            name="email"
+            name="mail_address"
             placeholder="Email address"
-            value={formData.email}
+            value={formData.mail_address}
             onChange={handleChange}
             required
             className="px-4 py-2 rounded-lg border border-white/30 bg-white/20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-white/80"
           />
           <input
             type="tel"
-            name="phone"
+            name="phone_number"
             placeholder="Phone number"
-            value={formData.phone}
+            value={formData.phone_number}
             onChange={handleChange}
             className="px-4 py-2 rounded-lg border border-white/30 bg-white/20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-white/80"
           />
+          <input
+            type="text"
+            name="message_object"
+            placeholder="Subject"
+            value={formData.message_object}
+            onChange={handleChange}
+            required
+            className="px-4 py-2 rounded-lg border border-white/30 bg-white/20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-white/80"
+          />
           <textarea
-            name="message"
+            name="text"
             placeholder="Your message..."
             rows="5"
-            value={formData.message}
+            value={formData.text}
             onChange={handleChange}
             required
             className="px-4 py-2 rounded-lg border border-white/30 bg-white/20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-white/80"
@@ -106,7 +137,8 @@ export default function ContactForm() {
           </button>
         </form>
 
-        {/* Contact info */}
+        {status && <p className="mt-2 text-center text-sm text-white/80">{status}</p>}
+
         <div className="mt-6 border-t border-white/30 pt-4 text-center text-white/80 text-sm sm:text-base space-y-1">
           <p>
             Email:{" "}
