@@ -18,8 +18,8 @@ export default function Footer() {
           <Link href="/contact" className="hover:text-white transition-colors duration-300">
             Contact
           </Link>
-          <Link href="/donate" className="hover:text-white transition-colors duration-300">
-            Donate
+          <Link href="/privacy-policy" className="hover:text-white transition-colors duration-300">
+            Privacy Policy
           </Link>
         </div>
 

@@ -2,4 +2,5 @@
     background-color: #121212;
     border-top: 1px solid rgba(255, 255, 255, 0.2); /* contour subtil */
   transition: all 0.3s ease-in-out;
+  z-index: 50;
 }

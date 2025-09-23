@@ -43,3 +43,28 @@ input[type=number] {
 body {
   font-family: 'Montserrat', sans-serif;
 }
+
+/* Scrollbar élégante */
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent; /* pas de fond pour rester épuré */
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3); /* translucide */
+  border-radius: 9999px; /* arrondi complet */
+  transition: background 0.3s ease;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6); /* plus visible au hover */
+}
+
+/* Pour Firefox */
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}

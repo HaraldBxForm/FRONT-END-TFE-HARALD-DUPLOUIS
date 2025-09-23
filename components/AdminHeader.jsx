@@ -12,9 +12,9 @@ export default function AdminHeader() {
       <div className={`container mx-auto px-4 py-6 flex justify-between items-center`}>
         {/* Logo */}
         <div className="text-2xl font-bold tracking-wide flex items-center">
-          <Link href="/" className="flex items-center">
+          <Link href="/admin" className="flex items-center">
             <img
-              src="/images/Plan de travail 1.png"
+              src="/images/logo-white.png"
               alt="OceanSavers Logo"
               className="h-8 w-auto max-w-full mr-2"
             />
@@ -25,10 +25,18 @@ export default function AdminHeader() {
         {/* Menu desktop */}
         <nav className="hidden lg:block">
           <ul className={`flex space-x-6 text-md font-medium ${styles.gap}`}>
-            <li><Link href="/" className="hover:text-yellow-400">Dashboard</Link></li>
-            <li><Link href="/news" className="hover:text-yellow-400">Publishing</Link></li>
+            <li><Link href="/admin" className="hover:text-yellow-400">Home</Link></li>
+            <li><Link href="/admin/new-article" className="hover:text-yellow-400"><span className="text-[#2a6aa6] font-bold">+</span> New Article</Link></li>
+            <li><Link href="/admin/articles" className="hover:text-yellow-400">Articles</Link></li>
+            <li><Link href="/admin/newsletter" className="hover:text-yellow-400">Newsletter</Link></li>
+            <li><Link href="/admin/inbox" className="hover:text-yellow-400">Inbox</Link></li>
+            <li><Link href="/admin/users" className="hover:text-yellow-400">Users</Link></li>
           </ul>
         </nav>
+            <div className={`flex space-x-6 text-md font-medium items-center`}>
+              <p className="text-red-500 font-bold py-1rounded-xl">● Admin</p>
+              <button className="bg-[#2a6aa6] border-white/20 hover:bg-[#164477] cursor-pointer py-1 px-3 rounded-md">Log Out</button>
+            </div>
 
         {/* Bouton burger (mobile) */}
         <button
@@ -52,14 +60,34 @@ export default function AdminHeader() {
       {isOpen && (
         <nav className="lg:hidden bg-white/30 backdrop-blur-lg border border-white/30 w-full">
           <ul className="flex flex-col items-center text-lg font-medium text-white w-full">
-            <Link href="/" onClick={() => setIsOpen(false)} className="w-full">
+            <Link href="/admin" onClick={() => setIsOpen(false)} className="w-full">
               <li className="border-b w-full p-2 text-center hover:bg-white/40 hover:text-white transition">
-                Dashboard
+                Home
               </li>
             </Link>
-            <Link href="/news" onClick={() => setIsOpen(false)} className="w-full">
+            <Link href="/admin/new-article" onClick={() => setIsOpen(false)} className="w-full">
               <li className="border-b w-full p-2 text-center hover:bg-white/40 hover:text-white transition">
-                Publishing
+                + New Article
+              </li>
+            </Link>
+            <Link href="/admin/articles" onClick={() => setIsOpen(false)} className="w-full">
+              <li className="border-b w-full p-2 text-center hover:bg-white/40 hover:text-white transition">
+                Articles
+              </li>
+            </Link>
+            <Link href="/admin/newsletter" onClick={() => setIsOpen(false)} className="w-full">
+              <li className="border-b w-full p-2 text-center hover:bg-white/40 hover:text-white transition">
+                Newsletter
+              </li>
+            </Link>
+            <Link href="/admin/inbox" onClick={() => setIsOpen(false)} className="w-full">
+              <li className="border-b w-full p-2 text-center hover:bg-white/40 hover:text-white transition">
+                Inbox
+              </li>
+            </Link>
+            <Link href="/admin/users" onClick={() => setIsOpen(false)} className="w-full">
+              <li className="border-b w-full p-2 text-center hover:bg-white/40 hover:text-white transition">
+                Users
               </li>
             </Link>
           </ul>

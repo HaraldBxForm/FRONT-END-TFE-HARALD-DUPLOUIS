@@ -1,24 +1,57 @@
 'use client'
 
-// app/(public)/news/[id]/page.jsx
-import articles from "@/data/articles.json";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { notFound, useParams } from "next/navigation.js";
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import { motion } from "framer-motion"
+import { notFound, useParams } from "next/navigation"
+import ArticleContent from "@/components/ArticleContentFormat.jsx" // ← import du composant
 
 export default function ArticlePage() {
-  const { id } = useParams();
-  const article = articles.find((a) => a.id.toString() === id.toString());
+  const { id } = useParams()
+  const [article, setArticle] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  (!article) && notFound()
+  useEffect(() => {
+    const fetchArticle = async () => {
+      try {
+        const response = await fetch(`http://localhost:8010/api/article/${id}`)
+        if (!response.ok) {
+          if (response.status === 404) return notFound()
+          throw new Error(`Erreur HTTP: ${response.status}`)
+        }
+        const data = await response.json()
+        setArticle(data)
+      } catch (err) {
+        console.error("Erreur lors du fetch de l’article :", err)
+        setError("Impossible de charger l’article.")
+      } finally {
+        setLoading(false)
+      }
+    }
 
-  // Formater la date en anglais
-  const date = new Date(article.date);
+    if (id) fetchArticle()
+  }, [id])
+
+  if (loading) {
+    return <p className="text-center pt-20 text-white">Chargement de l’article...</p>
+  }
+
+  if (error) {
+    return <p className="text-center pt-20 text-red-500">{error}</p>
+  }
+
+  if (!article) return notFound()
+
+  // Formater la date en anglais + heure
+  const date = new Date(article.date)
   const formattedDate = date.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
-  });
+    hour: "2-digit",
+    minute: "2-digit",
+  })
 
   return (
     <div
@@ -46,16 +79,19 @@ export default function ArticlePage() {
         </div>
 
         {/* Texte complet */}
-        <motion.div 
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="px-4 py-12 max-w-4xl mx-auto text-gray-100">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="px-4 py-12 max-w-4xl mx-auto text-gray-100"
+        >
           <h2 className="text-2xl py-2 font-bold">{article.preview}</h2>
-          <p className="mb-6 leading-relaxed text-white/80 text-justify">{article.text}</p>
 
-          {/* Footer avec bouton et infos */}
-          <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4">
+          {/* Affichage formaté */}
+          <ArticleContent text={article.text} />
+
+          {/* Footer */}
+          <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 mt-8">
             <Link
               href="/news"
               className="bg-white/10 backdrop-blur-md text-white font-medium py-2 px-6 rounded-full hover:bg-white/20 transition"
@@ -70,5 +106,5 @@ export default function ArticlePage() {
         </motion.div>
       </div>
     </div>
-  );
+  )
 }

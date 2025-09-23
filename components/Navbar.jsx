@@ -15,7 +15,7 @@ export default function Header() {
         <div className="text-2xl font-bold tracking-wide flex items-center">
           <Link href="/" className="flex items-center">
             <img
-              src="/images/Plan de travail 1.png"
+              src="/images/logo-color.png"
               alt="OceanSavers Logo"
               className="h-8 w-auto max-w-full mr-2"
             />
@@ -30,7 +30,7 @@ export default function Header() {
             <li><Link href="/news" className="hover:text-yellow-400">News</Link></li>
             <li><Link href="/about" className="hover:text-yellow-400">About</Link></li>
             <li><Link href="/donation" className="hover:text-yellow-400">Donation</Link></li>
-            <li><Link href="/shop" className="hover:text-yellow-400">Shop</Link></li>
+            {/* <li><Link href="/shop" className="hover:text-yellow-400">Shop</Link></li> */}
             <li><Link href="/contact" className="hover:text-yellow-400">Contact</Link></li>
           </ul>
         </nav>
