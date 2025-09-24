@@ -50,17 +50,17 @@ body {
 }
 
 .custom-scroll::-webkit-scrollbar-track {
-  background: transparent; /* pas de fond pour rester épuré */
+  background: #4b4b4b /* pas de fond pour rester épuré */
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3); /* translucide */
+  background: #585858; /* translucide */
   border-radius: 9999px; /* arrondi complet */
   transition: background 0.3s ease;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.6); /* plus visible au hover */
+  background: #1e1e1e; /* plus visible au hover */
 }
 
 /* Pour Firefox */

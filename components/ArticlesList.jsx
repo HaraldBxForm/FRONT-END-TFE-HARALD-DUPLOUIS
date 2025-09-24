@@ -88,14 +88,17 @@ export default function ArticlesList() {
 
           <div className="flex flex-row gap-2 sm:gap-4 flex-nowrap justify-end w-full md:w-auto">
             <select
-  value={selectedCategory}
-  onChange={(e) => setSelectedCategory(Number(e.target.value) || "")} // force number
->
-  <option value="">All categories</option>
-  {categories.map(cat => (
-    <option key={cat.id} value={cat.id}>{cat.title}</option>
-  ))}
-</select>
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(Number(e.target.value) || "")} // force number
+              className="bg-white/20 backdrop-blur-sm border border-white/20 text-white placeholder:text-gray-200 px-4 py-2 rounded-xl w-full md:w-auto focus:outline-none focus:ring-2 focus:ring-white/40 custom-scroll"
+            >
+              <option value="" className="bg-gray-700">All categories</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id} className="bg-gray-700 ">
+                  {cat.title}
+                </option>
+              ))}
+            </select>
 
             <button
               onClick={toggleSortOrder}
