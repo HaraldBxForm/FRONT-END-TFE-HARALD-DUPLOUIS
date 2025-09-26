@@ -94,7 +94,7 @@ export default function ArticlesList() {
             >
               <option value="" className="bg-gray-700">All categories</option>
               {categories.map((cat) => (
-                <option key={cat.id} value={cat.id} className="bg-gray-700 ">
+                <option key={cat.id} value={cat.id} className="bg-gray-700">
                   {cat.title}
                 </option>
               ))}
@@ -112,19 +112,23 @@ export default function ArticlesList() {
         {/* LISTE DES ARTICLES */}
         {loading && <p className="text-center text-white pt-10">Loading articles...</p>}
 
-        {sortedArticles.map((article, index) => (
-          <motion.div
-            key={article.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.05, duration: 0.3, ease: "easeOut" }}
-          >
-            <ArticleCard article={article} />
-          </motion.div>
-        ))}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {sortedArticles.map((article, index) => (
+            <motion.div
+              key={article.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05, duration: 0.3, ease: "easeOut" }}
+            >
+              <ArticleCard article={article} />
+            </motion.div>
+          ))}
+        </div>
 
-        {!loading && sortedArticles.length === 0 && <p className="text-center text-white pt-10">No articles found.</p>}
+        {!loading && sortedArticles.length === 0 && (
+          <p className="text-center text-white pt-10">No articles found.</p>
+        )}
       </div>
     </div>
   );

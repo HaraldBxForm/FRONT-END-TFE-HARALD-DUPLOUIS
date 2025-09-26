@@ -56,6 +56,15 @@ export default function ContactForm() {
       className="relative min-h-screen flex items-start justify-center bg-cover bg-center bg-fixed pt-24 sm:pt-32 lg:pt-40"
       style={{ backgroundImage: "url('/images/beautiful-photo-sea-waves.jpg')" }}
     >
+      {/* IMAGE DE FOND FLOUE */}
+      <div className="fixed inset-0 w-full h-full z-0">
+        <img
+          src="/images/belle-prise-de-vue-sous-l-eau-avec-la-lumiere-du-soleil-qui-brille-a-travers-la-surface.jpg"
+          alt="Background"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-xl"></div>
+      </div>
       <div className="absolute inset-0 bg-black/40"></div>
 
       <motion.div
@@ -126,7 +135,7 @@ export default function ContactForm() {
             value={formData.text}
             onChange={handleChange}
             required
-            className="px-4 py-2 rounded-lg border border-white/30 bg-white/20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-white/80"
+            className="px-4 py-2 rounded-lg border border-white/30 bg-white/20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-white/80 custom-scroll"
           ></textarea>
 
           <button

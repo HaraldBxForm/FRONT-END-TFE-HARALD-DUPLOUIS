@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useAuth } from "../app/auth/AuthContext.jsx";
 
 // Composant Multi-select pour les catégories
 function CategorySelector({ selectedCategories, setSelectedCategories, categories }) {
   const [open, setOpen] = useState(false);
+  
 
   const toggleCategory = (catId) => {
     if (selectedCategories.includes(catId)) {
@@ -58,6 +60,7 @@ export default function PublishingForm() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
+    const { token } = useAuth();
 
   // FETCH les catégories avec leur ID depuis le backend
   useEffect(() => {
@@ -113,7 +116,10 @@ export default function PublishingForm() {
 
       const response = await fetch("http://localhost:8010/api/article/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`
+  },
         body: JSON.stringify(payload),
       });
 
@@ -211,7 +217,7 @@ export default function PublishingForm() {
               rows={6}
               value={formData.text}
               onChange={handleChange}
-              className="px-4 py-2 rounded-lg border border-white/30 bg-[#2a2a2a] placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-white/80 resize-none flex-1"
+              className="px-4 py-2 rounded-lg border border-white/30 bg-[#2a2a2a] placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-white/80 resize-none flex-1 custom-scroll"
             />
 
             <button

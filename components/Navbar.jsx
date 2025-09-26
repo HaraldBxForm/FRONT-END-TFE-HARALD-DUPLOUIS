@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header className={styles.NavBar}>
-      <div className={`container mx-auto px-4 py-6 flex justify-between items-center`}>
+      <div className={`container mx-auto px-4 py-6 flex justify-between items-center pt-15 md:pt-6`}>
         {/* Logo */}
         <div className="text-2xl font-bold tracking-wide flex items-center">
           <Link href="/" className="flex items-center">
@@ -79,11 +79,11 @@ export default function Header() {
           Donation
         </li>
       </Link>
-      <Link href="/shop" onClick={() => setIsOpen(false)} className="w-full">
+      {/* <Link href="/shop" onClick={() => setIsOpen(false)} className="w-full">
         <li className="border-b w-full p-2 text-center hover:bg-white/40 hover:text-white transition">
           Shop
         </li>
-      </Link>
+      </Link> */}
       <Link href="/contact" onClick={() => setIsOpen(false)} className="w-full">
         <li className="w-full p-2 text-center hover:bg-white/40 hover:text-white transition">
           Contact

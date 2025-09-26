@@ -16,7 +16,7 @@ export default function HomeHero() {
       />
 
       {/* Overlay sombre */}
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0" />
 
       {/* Contenu centré */}
       <motion.div initial={{opacity :0, y :20}} animate={{opacity : 1,y : 0}} transition={{duration : 3}} className="relative z-10 text-center text-white px-4">

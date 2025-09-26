@@ -15,7 +15,15 @@ export default function Donation() {
         className="absolute inset-0 bg-cover bg-center bg-fixed"
         style={{ backgroundImage: "url('/images/beautiful-photo-sea-waves.jpg')" }}
       >
-        <div className="absolute inset-0 backdrop-blur-sm" /> {/* flou doux */}
+        {/* IMAGE DE FOND FLOUE */}
+      <div className="fixed inset-0 w-full h-full z-0">
+        <img
+          src="/images/belle-prise-de-vue-sous-l-eau-avec-la-lumiere-du-soleil-qui-brille-a-travers-la-surface.jpg"
+          alt="Background"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-xl"></div>
+      </div>
         <div className="absolute inset-0 bg-black/40" /> {/* overlay sombre */}
       </div>
 
